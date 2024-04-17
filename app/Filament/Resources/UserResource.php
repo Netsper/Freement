@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
@@ -13,7 +14,9 @@ use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserResource extends Resource
 {
@@ -64,6 +67,14 @@ class UserResource extends Resource
                             ->hiddenOn('edit')
                             ->required(fn (Page $livewire) => ($livewire instanceof CreateRecord)),
                     ]),
+                Section::make('Role')
+                    ->schema([
+                        Select::make('roles')->label('Role')
+                            ->hiddenLabel()
+                            ->relationship('roles', 'name')
+                            ->getOptionLabelFromRecordUsing(fn (Model $record) => Str::headline($record->name))
+                            ->native(false),
+                    ]),
                 Section::make(__('users.change_password'))
                     ->description(__('users.change_password_description'))
                     ->hiddenOn('create')
@@ -102,6 +113,10 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('roles.name')->label('Role')
+                    ->formatStateUsing(fn ($state): string => Str::headline($state))
+                    ->colors(['info'])
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('common.created_at'))
                     ->dateTime()
