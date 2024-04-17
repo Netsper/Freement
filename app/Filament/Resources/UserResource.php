@@ -14,6 +14,7 @@ use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,11 +24,6 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
-
-    /**
-     * The settings navigation group.
-     */
-    protected static ?string $navigationGroup = 'Collections';
 
     /**
      * The settings navigation sort order.
@@ -40,6 +36,11 @@ class UserResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('menu.access_management');
     }
 
     public static function form(Form $form): Form
