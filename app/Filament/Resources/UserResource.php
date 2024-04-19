@@ -26,6 +26,8 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static int $globalSearchResultsLimit = 5;
+
     /**
      * The settings navigation sort order.
      */
