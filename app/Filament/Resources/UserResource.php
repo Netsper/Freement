@@ -24,6 +24,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     /**
      * The settings navigation sort order.
      */
@@ -34,6 +36,7 @@ class UserResource extends Resource
      */
     public static function getNavigationBadge(): ?string
     {
+        // TODO: fix this
         return number_format(static::getModel()::count());
     }
 
@@ -156,6 +159,14 @@ class UserResource extends Resource
             'index'  => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit'   => Pages\EditUser::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'name',
+            'email',
         ];
     }
 }
