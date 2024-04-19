@@ -14,7 +14,6 @@ use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -74,6 +73,7 @@ class UserResource extends Resource
                             ->hiddenLabel()
                             ->relationship('roles', 'name')
                             ->getOptionLabelFromRecordUsing(fn (Model $record) => Str::headline($record->name))
+                            ->multiple()
                             ->native(false),
                     ]),
                 Section::make(__('users.change_password'))
