@@ -11,7 +11,7 @@ use Filament\Pages\SettingsPage;
 
 class GeneralSettings extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static ?string $navigationIcon  = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationGroup = 'Settings';
 
     protected static string $settings = SpatieGeneralSettings::class;
@@ -29,6 +29,7 @@ class GeneralSettings extends SettingsPage
                              ->placeholder('Enter the name of your site'),
                     Select::make('site_active')
                           ->label('Site Active')
+                          ->native(false)
                           ->options([
                               true  => 'Yes',
                               false => 'No',
