@@ -67,6 +67,7 @@
         @style([
             "max-height: {$maxHeight}" => $maxHeight,
             "height: -webkit-fill-available",
+            "max-width: -webkit-fill-available;"
         ])
     >
         {{ $slot }}
