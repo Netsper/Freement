@@ -1,2 +1,2 @@
-## ⚡ PixelPlay
-> HTML5-based game script
+## ⚡Freement
+> A beautiful starting point for your next Filamentphp project.
